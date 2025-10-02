@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Mahasiswa - PPBP/PPTI</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- FONDASI UMUM --- */
+        body { padding-top: 70px; background-color: #f8f8f8; font-family: Arial, sans-serif; }
+        .text-primary-custom { color: #004c99 !important; }
+
+        /* --- NAVBAR RTB (Konsisten) --- */
+        .custom-navbar {
+            background-color: #004c99; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1030;
+        }
+        .custom-navbar .nav-link { color: rgba(255, 255, 255, 0.8); font-weight: 500; padding-left: 1rem !important; padding-right: 1rem !important; }
+        .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active { color: white; border-bottom: 2px solid #5d9cec; }
+        
+        /* --- HEADER ABOUT --- */
+        #students-header {
+            background-color: #e6f0ff; /* Biru muda */
+            padding: 80px 0;
+            border-bottom: 5px solid #004c99;
+        }
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        /* --- PROGRAM FOKUS --- */
+        #program-section {
+            padding: 60px 0;
+        }
+        .feature-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #dc3545; /* Merah untuk menarik perhatian */
+            margin-bottom: 15px;
+        }
+
+        /* --- TESTIMONI SECTION --- */
+        #testimoni-section {
+            background-color: white;
+            padding: 60px 0;
+            border-top: 1px solid #eee;
+        }
+        .testimoni-bubble {
+            background-color: #f0f6ff;
+            padding: 20px;
+            border-radius: 15px;
+            border-top-left-radius: 0;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer { background-color: #f8f8f8; border-top: 1px solid #eee; padding-top: 50px; padding-bottom: 20px; }
+        .btn-primary-custom { background-color: #004c99; border-color: #004c99; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand text-white fw-bold" href="index.html">
+                <img src="assets/images/white_logo_RTB.png" alt="Logo Rumah Biru" height="40" class="me-2">
+                RUMAH BIRU
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="ppbp_ppti.html" class="nav-link active" aria-current="page">PPBP PPTI</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                    <li class="nav-item"><a href="laporan.html" class="nav-link" >Pelaporan</a></li>
+                    <li class="nav-item"><a href="gudang.html" class="nav-link">Gudang</a></li>
+                    <li class="nav-item"><a href="Berita.html" class="nav-link">Berita</a></li> 
+                </ul>
+                
+                <div class="d-flex">
+                    <a href="register.html" class="btn btn-danger me-2">Daftar Sekarang</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header id="students-header">
+        <div class="container">
+            <h1 class="header-title text-primary-custom mb-3">Program Pendidikan PPBP & PPTI</h1>
+            <p class="lead">
+                Rumah Biru adalah rumah kedua bagi mahasiswa Program Pendidikan Bakti BCA (PPBP) dan Program Pendidikan Teknik Informatika (PPTI).
+            </p>
+        </div>
+    </header>
+
+    <section id="program-section">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Fokus Pembinaan Karakter</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon"><i class="bi bi-person-check-fill"></i></div>
+                        <h5 class="fw-bold">Integritas & Disiplin</h5>
+                        <p class="small text-muted">Membentuk pribadi yang jujur, bertanggung jawab, dan disiplin melalui aturan asrama yang konsisten.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon"><i class="bi bi-code-slash"></i></div>
+                        <h5 class="fw-bold">Skill Teknis & Non-Teknis</h5>
+                        <p class="small text-muted">Program pendampingan yang fokus pada kemampuan teknis (IT/Bisnis) dan *soft skill* kepemimpinan.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="feature-box">
+                        <div class="feature-icon"><i class="bi bi-briefcase-fill"></i></div>
+                        <h5 class="fw-bold">Persiapan Karier</h5>
+                        <p class="small text-muted">Menyiapkan mahasiswa untuk menghadapi dunia kerja melalui *mentoring* dan *project-based learning*.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimoni-section">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5 text-dark">Kata Mereka tentang Rumah Biru</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="testimoni-bubble">
+                        <p class="fst-italic">"Asrama bukan hanya tempat tinggal, tapi tempat belajar bagaimana hidup mandiri dan berkolaborasi. Ini pengalaman yang mengubah segalanya!"</p>
+                        <p class="fw-bold mb-0 text-primary-custom">- Alex (PPBP Angkatan 1)</p>
+                        <small class="text-muted">PIC Logistik 2024</small>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="testimoni-bubble">
+                        <p class="fst-italic">"Fasilitas Coworking Space dan Communal Room sangat membantu kami mengerjakan project IT hingga larut malam. Sangat suportif!"</p>
+                        <p class="fw-bold mb-0 text-primary-custom">- Maya (PPTI Angkatan 2)</p>
+                        <small class="text-muted">PIC Dapur & Kebersihan 2025</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <span class="fw-bold text-primary-custom" style="font-size: 1.5rem;">Rumah Biru</span>
+                    <h5 class="fw-bold mt-2">Alamat</h5>
+                    <p class="text-muted">Jl. Telekomunikasi, Terusan Buah Batu - Bandung 40257, Indonesia</p>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">FAQ</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Umum</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Pendaftaran</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Artikel</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Tren Kampus</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Fakta Jurusan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-danger fw-bolder mb-3">Ada Pertanyaan?</h2>
+                    <p class="text-muted">Hubungi kami sekarang juga untuk informasi lebih lanjut.</p>
+                    <a href="#" class="btn btn-primary-custom text-white fw-bold">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="text-center text-muted border-top pt-3 mt-3">
+                &copy; 2025 Rumah Biru. Semua hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/about-students.js"></script>
+</body>
+</html>

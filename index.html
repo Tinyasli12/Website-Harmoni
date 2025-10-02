@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rumah Biru - Fasilitas RTB</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- FONDASI UMUM --- */
+        body { padding-top: 70px; font-family: Arial, sans-serif; color: #1a1a1a; }
+        .text-primary-custom { color: #004c99 !important; }
+
+        /* --- NAVBAR RTB --- */
+        .custom-navbar {
+            background-color: #004c99; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1030;
+        }
+        .custom-navbar .nav-link { color: rgba(255, 255, 255, 0.8); font-weight: 500; padding-left: 1rem !important; padding-right: 1rem !important; }
+        .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active { color: white; border-bottom: 2px solid #5d9cec; }
+
+        /* --- HERO SECTION (VERSI ASLI) --- */
+        .hero-section {
+            position: relative;
+            height: 450px;
+            background-image: url('assets/images/header-bg.jpg'); 
+            background-size: cover; background-position: center;
+        }
+        .hero-section .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.1); z-index: 2; }
+        .hero-section .image-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; z-index: 1; 
+            background-image: url("assets/images/RTB_tampak_depan.png"); 
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+        }
+
+        /* --- TAB NAVIGATION --- */
+        .category-nav .nav-link { color: #333; font-weight: 500; white-space: nowrap; }
+        .category-nav .nav-link.active { color: #004c99; border-color: #004c99; font-weight: 600; }
+        .category-nav .container-xl { overflow-x: auto; }
+
+        /* --- TABS CONTENT STYLING (2 KOLOM LAYOUT) --- */
+        .content-tab { display: none; opacity: 0; transition: opacity 0.4s ease-in-out; }
+        .content-tab.active-tab { display: block; opacity: 1; }
+        
+        .main-image-container { 
+            height: 300px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+        .main-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* --- SUB-CAROUSEL STYLING (COMMUNAL) --- */
+        .sub-carousel-container { position: relative; height: 400px; }
+        .sub-carousel-item { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .sub-carousel-item.active-slide { display: block; opacity: 1; }
+        .sub-carousel-item img { width: 100%; height: 100%; object-fit: cover; }
+        .communal-dot { width: 25px; height: 25px; background-color: #ccc; color: #333; line-height: 25px; font-size: 14px; font-weight: bold; border-radius: 5px; text-align: center; cursor: pointer; margin: 0 5px; display: inline-block; }
+        .communal-dot.active { background-color: #004c99; color: white; }
+
+        /* --- ATURAN RUANGAN STYLING --- */
+        .rules-section ul { padding-left: 0; }
+        .rules-section ul li { margin-bottom: 5px; color: #555; }
+        .rules-section i { color: #004c99; }
+        .other-info-section h4 { font-size: 1rem; color: #333; font-weight: 600; margin-bottom: 10px; }
+
+        /* --- FOOTER --- */
+        .site-footer { background-color: #f8f8f8; border-top: 1px solid #eee; padding-top: 50px; padding-bottom: 20px; }
+        .btn-primary-custom { background-color: #004c99; border-color: #004c99; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand text-white fw-bold" href="index.html">
+                <img src="assets/images/white_logo_RTB.png" alt="Logo Rumah Biru" height="40" class="me-2">
+                HARMONI
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="ppbp_ppti.html" class="nav-link">PPBP PPTI</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+                    <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                    <li class="nav-item"><a href="laporan.html" class="nav-link" >Pelaporan</a></li>
+                    <li class="nav-item"><a href="gudang.html" class="nav-link" >Gudang</a></li>
+                    <li class="nav-item"><a href="Berita.html" class="nav-link">Berita</a></li>
+                </ul>
+                
+                <div class="d-flex">
+                    <a href="register.html" class="btn btn-danger me-2">Daftar Sekarang</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section text-white d-flex flex-column justify-content-center align-items-center">
+        <div class="image-overlay"></div> 
+        <div class="overlay"></div> 
+        
+        <div class="container text-center position-relative z-3">
+            <h1 class="display-5 fw-bold mb-4">Lihat Fasilitas Kami Dalam 360°</h1>
+            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                <a href="https://maps.google.com/" target="_blank">
+                    <button type="button" class="btn btn-light btn-lg px-4 me-sm-3" id="viewMapsBtn">View Maps</button>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <section class="category-nav py-3 border-bottom">
+        <div class="container-xl">
+            <ul class="nav nav-underline justify-content-center" id="facilityTabs">
+                <li class="nav-item"><a class="nav-link active" data-target="#asrama" href="#">Asrama</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#communal" href="#">Comunall</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#mesincuci" href="#">Ruang Mesin Cuci</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#dapur" href="#">Dapur</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#gudang" href="#">Gudang</a></li> 
+                <li class="nav-item"><a class="nav-link" data-target="#serbaguna" href="#">Serbaguna</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#coworking" href="#">Coworking Space</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#theater" href="#">Theater</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#plaza" href="#">Plaza</a></li>
+                <li class="nav-item"><a class="nav-link" data-target="#voli" href="#">Lapangan Voli</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <main class="content-section py-5">
+        <div class="container-fluid px-5"> <div id="asrama" class="content-tab active-tab">
+                <div class="row g-4 align-items-start">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/dormy.jpg" class="img-fluid" alt="Asrama Rumah Biru">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Asrama: Aman dan Nyaman untuk Semua Warga Biru!</h2>
+                        <p class="lead">Asrama Rumah Biru (RTB) merupakan program <strong class="text-danger">wajib</strong> bagi mahasiswa baru tahun pertama. Dilengkapi dengan berbagai fasilitas pendukung, RTB memastikan pengalaman tinggal yang kondusif untuk belajar dan beradaptasi.</p>
+                        
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Aturan Umum Keseharian</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-x-circle-fill me-2"></i> Dilarang keras mengonsumsi minuman beralkohol, berjudi, berkelahi, merokok, atau melakukan tindakan asusila.</small></li>
+                                    <li><small><i class="bi bi-heart-fill me-2"></i> Tidak diperbolehkan ada aktivitas berpacaran.</small></li>
+                                    <li><small><i class="bi bi-clock-fill me-2"></i> Wajib mengikuti aturan Jam Buka-Tutup Pintu RTB.</small></li>
+                                    <li><small><i class="bi bi-people-fill me-2"></i> Saling tidak memasuki lantai (area) lawan jenis.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Aturan Kamar & Kebersihan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-plug-fill me-2"></i> Penggunaan stopkontak hanya untuk laptop, *charger* HP, *hairdryer*, *straightener*.</small></li>
+                                    <li><small><i class="bi bi-exclamation-triangle-fill me-2"></i> Penggantian kunci kamar dikenakan biaya $75K$.</small></li>
+                                    <li><small><i class="bi bi-trash-fill me-2"></i> Membuang sampah pada tempatnya, memisahkan sampah organik/anorganik.</small></li>
+                                    <li><small><i class="bi bi-dash-circle-fill me-2"></i> Dilarang memasak di kamar, *cluster*, atau koridor. Dilarang makan di kamar.</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="communal" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div id="communal-carousel" class="sub-carousel-container rounded shadow-lg w-100 overflow-hidden">
+                            <div class="sub-carousel-item active-slide" data-slide="1"><img src="assets/images/Ruangan/Comunall/Comunall 1.jpg" alt="Comunall 1"></div>
+                            <div class="sub-carousel-item" data-slide="2"><img src="assets/images/Ruangan/Comunall/Comunall 2_Samping.jpg" alt="Comunall 2"></div>
+                            <div class="sub-carousel-item" data-slide="3"><img src="assets/images/Ruangan/Comunall/Comunall 3.jpg" alt="Comunall 3"></div>
+                            <div class="sub-carousel-item" data-slide="4"><img src="assets/images/Ruangan/Comunall/Comunall 5.jpg" alt="Comunall 5"></div>
+                        </div>
+                        <div class="d-flex justify-content-start mt-3" id="communal-dots">
+                             <span class="dot communal-dot active" data-slide-to="1">1</span> 
+                             <span class="dot communal-dot" data-slide-to="2">2</span> 
+                             <span class="dot communal-dot" data-slide-to="3">3</span> 
+                             <span class="dot communal-dot" data-slide-to="4">5</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Comunall: Ruang Bersama untuk Interaksi</h2>
+                        <p class="lead">Setiap lantai dilengkapi dengan ruang *communal* yang luas dan nyaman, tempat terbaik bagi Warga Biru untuk berkumpul, berdiskusi santai, atau sekadar melepaskan penat setelah kuliah.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Ruang Comunall</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-clock-fill me-2"></i> Waktu penggunaan Komunal sampai **Pk 23.00 WIB** (*weekday*) & **Pk 24.00 WIB** (*weekend*).</small></li>
+                                    <li><small><i class="bi bi-volume-mute-fill me-2"></i> Diizinkan melewati ketentuan jika untuk tugas/belajar, dengan menjaga ketertiban dan ketenangan.</small></li>
+                                    <li><small><i class="bi bi-trash-fill me-2"></i> **Wajib merapikan** fasilitas umum setelah dipakai ("CLEAN AS YOU GO").</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Booking & Larangan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-calendar-event-fill me-2"></i> Booking komunal hanya untuk **acara organisasi** (belajar/kerja kelompok tidak perlu booking).</small></li>
+                                    <li><small><i class="bi bi-dash-circle-fill me-2"></i> Dilarang melakukan aktivitas **memasak**.</small></li>
+                                    <li><small><i class="bi bi-dash-circle-fill me-2"></i> Dilarang menyimpan barang di luar lemari atau adanya aktivitas pacaran.</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="mesincuci" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/Mesin Cuci/" alt="Ruang Mesin Cuci">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Ruang Mesin Cuci: Fasilitas Kebersihan Mandiri</h2>
+                        <p class="lead">Disediakan area mesin cuci modern yang terawat untuk memudahkan Warga Biru mengelola kebersihan pakaian mereka secara mandiri dan efisien, tersedia 24 jam.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Booking & Pemakaian</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-chat-dots-fill me-2"></i> **Wajib chat PIC** untuk booking mesin cuci, maksimal H-1 sebelum pemakaian.</small></li>
+                                    <li><small><i class="bi bi-clock-fill me-2"></i> Durasi maksimal booking adalah **2 jam**.</small></li>
+                                    <li><small><i class="bi bi-exclamation-triangle-fill me-2"></i> Dilarang mencuci/menjemur *seprei*, *matras protector*, *bedcover*.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Kewajiban Pengguna</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-person-fill me-2"></i> **Wajib meninggalkan identitas** di atas mesin cuci saat proses mencuci.</small></li>
+                                    <li><small><i class="bi bi-clean-fill me-2"></i> Wajib **membersihkan filter** mesin cuci setelah selesai.</small></li>
+                                    <li><small><i class="bi bi-box-fill me-2"></i> Perlengkapan cuci dapat disimpan di **Ruang Peralatan Cuci Lt. 5**.</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="dapur" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/Dapur/Dapur.jpg" alt="Dapur Umum">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Dapur: Area Kreasi Kuliner Bersama</h2>
+                        <p class="lead">Dapur umum dilengkapi dengan peralatan dasar yang memadai. Tempat ideal bagi Warga Biru untuk memasak makanan ringan, berhemat, atau menjalin keakraban melalui kegiatan masak bersama.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Booking & Durasi</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-calendar-event-fill me-2"></i> **Wajib Booking** (Kompor & Air Fryer maks. 1 jam; Rice Cooker maks. 2 jam).</small></li>
+                                    <li><small><i class="bi bi-trash-fill me-2"></i> WAJIB memberikan **foto fasilitas bersih** kepada PIC setelah digunakan.</small></li>
+                                    <li><small><i class="bi bi-dash-circle-fill me-2"></i> **TIDAK BOLEH** menggunakan minyak sama sekali.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Kulkas & Penyimpanan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-box-fill me-2"></i> Bahan makanan wajib diberi **label** (Nama, Kamar, Tanggal).</small></li>
+                                    <li><small><i class="bi bi-archive-fill me-2"></i> Kulkas hanya untuk menyimpan makanan/minuman **maksimal 2 item/orang**.</small></li>
+                                    <li><small><i class="bi bi-cup-hot-fill me-2"></i> Kulkas dapur **hanya** boleh digunakan oleh penghuni **Lantai G**.</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gudang" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/" class="img-fluid" alt="Ruang Gudang">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Gudang: Tempat Penyimpanan Barang Pribadi</h2>
+                        <p class="lead">Gudang komunal tersedia untuk menyimpan barang-barang non-esensial atau musiman yang tidak dapat disimpan di dalam kamar asrama. Membantu menjaga kamar tetap rapi.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Umum</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-box-fill me-2"></i> **Label:** Setiap barang wajib diberi label nama dan kontak yang jelas.</small></li>
+                                    <li><small><i class="bi bi-calendar-check-fill me-2"></i> **Durasi:** Batas waktu penyimpanan maksimal 3 bulan (dapat diperpanjang).</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Catatan Tambahan</h4>
+                                <p><strong>Akses:</strong> Hanya dengan persetujuan dan pendampingan petugas.</p>
+                                <p><strong>Larangan:</strong> Dilarang menyimpan barang berbahaya, mudah busuk, atau barang berharga tinggi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="serbaguna" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/" alt="Ruang Serbaguna">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Serbaguna: Aula untuk Berbagai Acara</h2>
+                        <p class="lead">Ruang Serbaguna adalah aula besar yang digunakan untuk acara formal, seminar, pertemuan besar, atau kegiatan pengembangan diri dan karakter wajib bagi Warga Biru.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">SOP Ruang Serbaguna</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-calendar-event-fill me-2"></i> Penggunaan untuk kegiatan privat wajib atas **izin PIC Sergun**.</small></li>
+                                    <li><small><i class="bi bi-people-fill me-2"></i> Batasan maksimum peserta kegiatan privat adalah **50 orang**.</small></li>
+                                    <li><small><i class="bi bi-table me-2"></i> Wajib mengembalikan meja dan kursi ke tempat semula.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Prioritas Penggunaan</h4>
+                                <p><strong>Prioritas:</strong> Ruang Sergun diprioritaskan untuk **ruang makan** di jam 16.30-19.00 WIB.</p>
+                                <p><strong>Penggunaan:</strong> Kegiatan akademik, non-akademik, dan orientasi mahasiswa baru.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="coworking" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/CWS/CWS.jpg" alt="Coworking Space">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Coworking Space: Lingkungan Belajar Modern</h2>
+                        <p class="lead">Area belajar modern dengan koneksi internet cepat, meja yang ergonomis, dan suasana yang tenang. Cocok untuk kerja kelompok atau fokus mengerjakan tugas individu.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Booking & Durasi</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-person-check-fill me-2"></i> *Booking* selalu bersifat **"private"** dan paling lama **2 jam** dalam sehari.</small></li>
+                                    <li><small><i class="bi bi-people-fill me-2"></i> Tidak diperkenankan *booking private* dengan jumlah orang **kurang dari 20 orang**.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Etika & Larangan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-volume-mute-fill me-2"></i> Wajib menjaga ketertiban, dilarang berpacaran.</small></li>
+                                    <li><small><i class="bi bi-cup-hot-fill me-2"></i> **DILARANG** membuat atau memakan makanan berat, minuman, atau yang berbau menyengat.</small></li>
+                                    <li><small><i class="bi bi-plug-fill me-2"></i> Penggunaan CWS diprioritaskan untuk keperluan **BELAJAR**.</small></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="theater" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/content-theater.jpg" alt="Theater Room">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Theater: Ruang Audiovisual Eksklusif</h2>
+                        <p class="lead">Fasilitas teater mini untuk presentasi film, pemutaran materi edukasi, atau bahkan acara malam film komunitas Warga Biru dengan pengalaman audio-visual yang imersif.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Tata Tertib Theater</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-calendar-event-fill me-2"></i> Apabila ingin menggunakan Theater untuk kegiatan tertentu (*privat*), diharapkan **booking terlebih dahulu** ke PIC Theater.</small></li>
+                                    <li><small><i class="bi bi-people-fill me-2"></i> Batasan maksimum peserta kegiatan adalah **50 orang**.</small></li>
+                                    <li><small><i class="bi bi-lightbulb-fill me-2"></i> Tidak diizinkan menggunakan ruangan **tanpa pengawasan petugas**.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Penjelasan Lainnya</h4>
+                                <p><strong>Sistem Audio:</strong> Dolby Digital 5.1 Surround System.</p>
+                                <p><strong>Penggunaan:</strong> Pemutaran film komunitas, presentasi mata kuliah, *launching* proyek.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="plaza" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/Plaza/Plaza.jpg" alt="Plaza Asrama">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Plaza: Area Terbuka untuk Bersantai</h2>
+                        <p class="lead">Plaza adalah jantung area asrama, ruang terbuka yang luas dengan tempat duduk, cocok untuk menikmati udara segar, berinteraksi, atau mengadakan pasar malam kecil-kecilan.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Aturan Area Plaza</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-trash-fill me-2"></i> **Kebersihan:** Selalu membuang sampah pada tempatnya.</small></li>
+                                    <li><small><i class="bi bi-volume-up-fill me-2"></i> **Kegiatan:** Izin diperlukan untuk acara yang melibatkan pengeras suara.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Penjelasan Lainnya</h4>
+                                <p><strong>Akses:</strong> Terbuka 24 jam.</p>
+                                <p><strong>Fitur:</strong> Air mancur hias, bangku taman, koneksi Wi-Fi outdoor.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="voli" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/content-voli.jpg" alt="Lapangan Voli">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Lapangan Voli: Fasilitas Olahraga Rekreasi</h2>
+                        <p class="lead">Lapangan voli di luar ruangan, selalu tersedia untuk kegiatan olahraga, turnamen antar blok, atau sekadar sesi rekreasi sore hari bersama teman-teman Warga Biru.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Lapangan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-clock-fill me-2"></i> **Waktu:** Penggunaan maksimal hingga pukul **22.00 WIB** untuk menjaga ketenangan.</small></li>
+                                    <li><small><i class="bi bi-calendar-event-fill me-2"></i> **Turnamen:** Pendaftaran turnamen harus diajukan.</small></li>
+                                    <li><small><i class="bi bi-person-fill me-2"></i> **Sepatu:** Wajib menggunakan sepatu olahraga yang sesuai.</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Penjelasan Lainnya</h4>
+                                <p><strong>Jenis Lapangan:</strong> Multi-court (dapat diubah menjadi lapangan bulutangkis).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="gudang" class="content-tab">
+                <div class="row g-4 align-items-start px-xl-5">
+                    <div class="col-md-6">
+                        <div class="main-image-container shadow-lg">
+                            <img src="assets/images/Ruangan/Dapur/Dapur.jpg" class="img-fluid" alt="Ruang Gudang">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h2 class="display-6 fw-bold text-primary-custom mb-3">Gudang: Tempat Penyimpanan Barang Pribadi</h2>
+                        <p class="lead">Gudang komunal tersedia untuk menyimpan barang-barang non-esensial atau musiman yang tidak dapat disimpan di dalam kamar asrama. Membantu menjaga kamar tetap rapi.</p>
+                        <div class="row pt-4 border-top mt-3">
+                            <div class="col-lg-6 mb-4 rules-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Ketentuan Penyimpanan</h4>
+                                <ul class="list-unstyled">
+                                    <li><small><i class="bi bi-box-fill me-2"></i> **Label:** Setiap barang wajib diberi label nama dan kontak yang jelas.</small></li>
+                                    <li><small><i class="bi bi-calendar-check-fill me-2"></i> **Durasi:** Batas waktu penyimpanan maksimal 3 bulan (dapat diperpanjang).</small></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6 mb-4 other-info-section">
+                                <h4 class="text-primary-custom fw-bold mb-3 border-bottom pb-2">Penjelasan Lainnya</h4>
+                                <p><strong>Akses:</strong> Hanya dengan persetujuan dan pendampingan petugas.</p>
+                                <p><strong>Larangan:</strong> Dilarang menyimpan barang berbahaya, mudah busuk, atau barang berharga tinggi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <footer class="site-footer pt-5 pb-4 border-top">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/logo-footer.png" alt="Rumah Biru" height="40" class="me-2">
+                        <span class="fw-bold text-primary-custom" style="font-size: 1.5rem;">Rumah Biru</span>
+                    </div>
+                    <h5 class="fw-bold">Alamat</h5>
+                    <p class="text-muted">Jl. Pakuan No.3, Sumur Batu, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat 16810</p>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">FAQ</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Umum</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Persyaratan Pendaftaran</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Berita</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Tren RTB</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Fakta PPBP/PPTI</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-danger fw-bolder mb-3">Ada Pertanyaan?</h2>
+                    <p class="text-muted">Hubungi kami sekarang juga untuk informasi lebih lanjut.</p>
+                    <a href="#" class="btn btn-primary-custom text-white fw-bold">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="text-center text-muted border-top pt-3 mt-3">
+                © 2025 Rumah Biru. Semua hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

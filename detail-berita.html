@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita - Tutorial Keranjang Katakura</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- FONDASI UMUM --- */
+        body { padding-top: 70px; background-color: #f0f0f0; font-family: Arial, sans-serif; }
+        .text-primary-custom { color: #004c99 !important; }
+
+        /* --- NAVBAR RTB (Konsisten) --- */
+        .custom-navbar {
+            background-color: #004c99; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1030;
+        }
+        .custom-navbar .nav-link { color: rgba(255, 255, 255, 0.8); font-weight: 500; padding-left: 1rem !important; padding-right: 1rem !important; }
+        .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active { color: white; border-bottom: 2px solid #5d9cec; }
+
+        /* --- ARTIKEL LAYOUT --- */
+        .article-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        .article-hero-image {
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Styling Judul dan Info */
+        .article-title {
+            font-weight: 800;
+            color: #004c99;
+            font-size: 2.5rem;
+        }
+        .article-meta {
+            font-size: 0.9rem;
+            color: #52575C;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Bagian Khusus (Manfaat/Troubleshooting) */
+        .highlight-box {
+            background-color: #e6f0ff; /* Biru muda */
+            border-left: 4px solid #004c99;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .highlight-box h5 {
+            color: #004c99;
+            font-weight: bold;
+        }
+        
+        .step-list ol {
+            padding-left: 20px;
+        }
+        .step-list li {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        /* --- FOOTER --- */
+        .site-footer { background-color: #f8f8f8; border-top: 1px solid #eee; padding-top: 50px; padding-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand text-white fw-bold" href="index.html">RUMAH BIRU</a>
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report.html">Pelaporan</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about-students.html">Mahasiswa PPBP/PPTI</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Fasilitas</a></li>
+                </ul>
+                <div class="d-flex">
+                    <a href="register.html" class="btn btn-danger me-2">Daftar Sekarang</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="article-container">
+        
+        <h1 class="article-title">Tutorial Lengkap: Membuat Keranjang Katakura</h1>
+        <div class="article-meta">
+            <i class="bi bi-calendar me-1"></i> Dipublikasikan: 2 Okt 2025 | <i class="bi bi-tag me-1"></i> Kategori: Logistik & DIY
+        </div>
+        
+        <img src="assets/images/katakura-hero.jpg" class="article-hero-image w-100 mb-4" alt="Keranjang Katakura">
+
+        <h3 class="text-primary-custom fw-bold mb-3">Apa Itu Keranjang Katakura?</h3>
+        <p class="lead">
+            Keranjang Katakura adalah wadah portabel yang dirancang khusus untuk memudahkan proses pemindahan dan pengarsipan barang logistik, baik itu dokumen, peralatan, maupun inventaris kelas. Nama ini terinspirasi dari kebutuhan akan organisasi yang efisien dalam lingkungan asrama.
+        </p>
+
+        <div class="highlight-box">
+            <h5><i class="bi bi-trophy-fill me-2"></i> Tujuan dan Manfaat Utama:</h5>
+            <ul class="list-unstyled mb-0">
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i> **Manajemen Stok:** Memudahkan PIC Logistik kelas dalam melacak ketersediaan item.</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i> **Transportasi:** Menyediakan wadah yang aman dan kokoh saat memindahkan barang dari gudang ke ruang acara (Serbaguna/Komunal).</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i> **Kerapian:** Memastikan area gudang dan kamar tetap terorganisir dengan baik.</li>
+            </ul>
+        </div>
+        
+        <h3 class="text-primary-custom fw-bold mt-5 mb-3">Alat dan Bahan yang Dibutuhkan</h3>
+        <ul class="list-unstyled">
+            <li><i class="bi bi-tools me-2"></i> Kardus bekas (ukuran sedang)</li>
+            <li><i class="bi bi-scissors me-2"></i> Gunting atau pisau *cutter*</li>
+            <li><i class="bi bi-paint-bucket me-2"></i> Lakban tebal (warna bening/cokelat)</li>
+            <li><i class="bi bi-journal-text me-2"></i> Spidol permanen dan label (untuk identitas)</li>
+        </ul>
+
+        <h3 class="text-primary-custom fw-bold mt-5 mb-3">Langkah-Langkah Membuat Keranjang</h3>
+        <div class="step-list">
+            <ol>
+                <li>**Persiapan Kardus:** Buka tutup atas kardus dan potong semua flap tutupnya hingga rata dengan sisi kardus. Ini adalah dasar keranjang.</li>
+                <li>**Perkuat Bagian Bawah:** Balik kardus, lalu lapisi bagian bawah dengan dua lapis lakban tebal secara silang untuk menjamin kekuatan saat memuat barang berat.</li>
+                <li>**Buat Pegangan:** Di sisi pendek kardus, ukur dan potong lubang berbentuk persegi panjang sekitar 10 cm x 3 cm di tengah, yang akan berfungsi sebagai pegangan.</li>
+                <li>**Perkuat Pegangan:** Lapisi seluruh tepi lubang pegangan dengan lakban, lipat ke dalam, agar pegangan tidak mudah sobek saat diangkat.</li>
+                <li>**Finalisasi dan Pelabelan:** Lapisi semua tepi atas kardus yang terbuka dengan lakban untuk menambah ketahanan. Tuliskan identitas kelas dan PIC Logistik di bagian samping dengan spidol permanen.</li>
+            </ol>
+            <img src="assets/images/katakura-step-guide.png" class="img-fluid rounded mt-3" alt="Visualisasi Langkah">
+        </div>
+
+        <h3 class="text-primary-custom fw-bold mt-5 mb-3">Jika Gagal, Bagaimana? (Troubleshooting)</h3>
+        <div class="highlight-box bg-white border border-danger">
+            <h5 class="text-danger"><i class="bi bi-exclamation-triangle-fill me-2"></i> Masalah Umum dan Solusi:</h5>
+            <ul class="list-unstyled mb-0">
+                <li>**Keranjang melengkung saat diisi:** **Penyebab:** Bagian bawah kurang diperkuat. **Solusi:** Tambahkan lapis ketiga lakban di bagian bawah dan pasang dua batang kayu tipis horizontal di dasar bagian dalam.</li>
+                <li>**Pegangan robek:** **Penyebab:** Lubang pegangan terlalu dekat dengan tepi atas. **Solusi:** Gunakan lem *super glue* di bawah lakban saat melapisinya, atau potong pegangan lebih rendah.</li>
+                <li>**Gagal total:** **Solusi:** Jangan putus asa! Laporkan kebutuhan Anda ke CORE Team, dan Anda bisa memesan keranjang yang sudah jadi (jika stok tersedia).</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <span class="fw-bold text-primary-custom" style="font-size: 1.5rem;">Rumah Biru</span>
+                    <h5 class="fw-bold mt-2">Alamat</h5>
+                    <p class="text-muted">Jl. Telekomunikasi, Terusan Buah Batu - Bandung 40257, Indonesia</p>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">FAQ</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Umum</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Pendaftaran</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Artikel</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Tren Kampus</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Fakta Jurusan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-danger fw-bolder mb-3">Ada Pertanyaan?</h2>
+                    <p class="text-muted">Hubungi kami sekarang juga untuk informasi lebih lanjut.</p>
+                    <a href="#" class="btn btn-primary-custom text-white fw-bold">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="text-center text-muted border-top pt-3 mt-3">
+                &copy; 2025 Rumah Biru. Semua hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/detail-berita.js"></script>
+</body>
+</html>

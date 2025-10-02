@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Detail Fasilitas - Rumah Biru</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- FONDASI UMUM --- */
+        body { padding-top: 70px; background-color: #f8f8f8; font-family: Arial, sans-serif; }
+        .text-primary-custom { color: #004c99 !important; }
+
+        /* --- WARNA RTB UNTUK KOMPONEN BARU --- */
+        :root {
+            --rtb-primary: #004c99; /* Biru RTB */
+            --rtb-action: #dc3545; /* Merah untuk tombol aksi */
+            --rtb-light-gray: #E8E8E8;
+        }
+
+        /* --- NAVBAR RTB (Konsisten) --- */
+        .custom-navbar {
+            background-color: var(--rtb-primary); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1030;
+        }
+        .custom-navbar .nav-link { color: rgba(255, 255, 255, 0.8); font-weight: 500; padding-left: 1rem !important; padding-right: 1rem !important; }
+        .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active { color: white; border-bottom: 2px solid #5d9cec; }
+        
+        /* --- DETAIL LAYOUT --- */
+        .main-content-wrapper { padding: 30px 0; }
+        .detail-card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
+        .venue-detail-header { padding-bottom: 20px; }
+        .venue-rating { color: #ffc107; font-weight: bold; }
+        
+        /* --- GALERI GAMBAR --- */
+        .gallery-main-image { height: 450px; object-fit: cover; border-radius: 10px; }
+        .gallery-thumbnail-container { 
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; margin-top: 10px;
+        }
+        .gallery-thumbnail { height: 80px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; transition: border-color 0.2s; }
+        .gallery-thumbnail.active, .gallery-thumbnail:hover { border-color: var(--rtb-primary); }
+
+        /* --- FIELD SELECTION STYLING (PADEL CO. ADAPTATION) --- */
+        .field-card { border-radius: 12px; box-shadow: 0 1px 6px rgba(37, 40, 43, 0.08); padding: 20px; margin-bottom: 24px; background-color: white; }
+        .field-image { height: 200px; object-fit: cover; border-radius: 8px; }
+        .facility-icon-small { width: 20px; margin-right: 8px; color: var(--rtb-primary); } /* Mengganti warna icon */
+
+        .calendar-day {
+            text-align: center; padding: 8px; cursor: pointer; border-radius: 8px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+        .calendar-day.selected {
+            background-color: var(--rtb-primary); /* Biru RTB saat dipilih */
+            color: white;
+        }
+        
+        .filter-btn {
+            border: 1px solid var(--rtb-light-gray);
+            border-radius: 8px; padding: 8px 16px; background: white;
+            display: flex; align-items: center;
+        }
+        
+        .slot-btn {
+            background-color: var(--rtb-action); /* Merah RTB */
+            color: white; border: none; border-radius: 8px;
+            padding: 8px 16px; font-weight: 500;
+        }
+        
+        .slot-time {
+            border: 1px solid var(--rtb-light-gray); border-radius: 8px;
+            padding: 8px; text-align: center; margin: 4px;
+            cursor: pointer; transition: background-color 0.2s;
+        }
+        
+        .slot-time.selected {
+            border-color: var(--rtb-primary); 
+            background-color: rgba(0, 76, 153, 0.1); /* Biru muda transparan */
+        }
+
+        /* --- FOOTER --- */
+        .site-footer { background-color: #f8f8f8; border-top: 1px solid #eee; padding-top: 50px; padding-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand text-white fw-bold" href="index.html">HARMONI</a>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="ppbp_ppti.html" class="nav-link">PPBP PPTI</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                    <li class="nav-item"><a href="laporan.html" class="nav-link">Pelaporan</a></li>
+                    <li class="nav-item"><a href="gudang.html" class="nav-link active" aria-current="page">Gudang</a></li>
+                    <li class="nav-item"><a href="booking.html" class="nav-link">Tentang Kami</a></li>
+                    <li class="nav-item"><a href="Berita.html" class="nav-link">Berita</a></li> 
+                </ul>
+                <div class="d-flex">
+                    <a href="booking.html" class="btn btn-outline-light btn-sm">Kembali ke Booking</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content-wrapper">
+        
+        <div class="venue-detail-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html" class="text-decoration-none text-primary-custom">Home</a></li>
+                    <li class="breadcrumb-item"><a href="booking.html" class="text-decoration-none text-primary-custom">Booking</a></li>
+                    <li class="breadcrumb-item active" aria-current="page" id="breadcrumbName">Detail</li>
+                </ol>
+            </nav>
+            <h1 class="text-primary-custom fw-bold mb-1" id="itemName">Memuat Detail...</h1>
+            <p class="text-muted lead mb-0">
+                <i class="bi bi-geo-alt-fill me-1"></i> Lokasi: <span id="itemLocation"></span> | Tipe: <span id="itemRoomType"></span>
+            </p>
+        </div>
+
+        <div class="row g-4 w-100 mb-5">
+            
+            <div class="col-lg-7">
+                <div class="card detail-card p-3">
+                    <img src="assets/images/placeholder-large.jpg" class="img-fluid gallery-main-image w-100" id="mainImage" alt="Fasilitas Utama">
+                    
+                    <div id="thumbnailContainer" class="gallery-thumbnail-container">
+                        </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="card detail-card p-4 h-100">
+                    
+                    <h3 class="mb-3 text-primary-custom">Rincian Fasilitas</h3>
+                    <div class="mb-4">
+                        <p class="mb-1"><strong>Status Pinjam:</strong> <span class="badge bg-success">GRATIS</span></p>
+                        <p class="mb-1"><strong>Rating:</strong> <span id="itemRating" class="venue-rating"></span></p>
+                    </div>
+
+                    <h4 class="mb-2 border-bottom pb-2">Deskripsi</h4>
+                    <p id="itemDescriptionLong" class="text-muted small">Memuat deskripsi panjang...</p>
+                    
+                    <h4 class="mb-2 border-bottom pb-2 mt-4">Aturan Penggunaan</h4>
+                    <ul class="rules-list" id="rulesList">
+                        <li>Memuat aturan...</li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+        
+        <div class="container mt-5">
+            <h3 class="mb-4">Pilih Item Booking</h3>
+            
+            <div class="card field-card mb-4">
+                <div class="d-flex justify-content-between align-items-center flex-wrap" id="calendarContainer">
+                    </div>
+                
+                <div class="d-flex justify-content-end mt-3">
+                    <button class="filter-btn me-2">
+                         Filter Waktu (Simulasi)
+                    </button>
+                    <button class="filter-btn">
+                         Filter Item (Simulasi)
+                    </button>
+                </div>
+            </div>
+            
+            <div id="fieldsList" class="mb-5">
+                </div>
+            
+        </div>
+        
+
+        <section id="recommendation-section" class="container-fluid">
+            <h3 class="fw-bold mb-4 text-primary-custom">Rekomendasi Lainnya</h3>
+            <div class="row g-3" id="recommendationList">
+                </div>
+        </section>
+    </div>
+
+    <footer class="site-footer pt-5 pb-4">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <span class="fw-bold text-primary-custom" style="font-size: 1.5rem;">Rumah Biru</span>
+                    <h5 class="fw-bold mt-2">Alamat</h5>
+                    <p class="text-muted">Jl. Telekomunikasi, Terusan Buah Batu - Bandung 40257, Indonesia</p>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">FAQ</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Umum</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Pendaftaran</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Artikel</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Tren Kampus</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Fakta Jurusan</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-danger fw-bolder mb-3">Ada Pertanyaan?</h2>
+                    <p class="text-muted">Hubungi kami sekarang juga untuk informasi lebih lanjut.</p>
+                    <a href="#" class="btn btn-primary-custom text-white fw-bold">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="text-center text-muted border-top pt-3 mt-3">
+                &copy; 2025 Rumah Biru. Semua hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/detail-booking.js"></script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berita & Kegiatan - Rumah Biru</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <style>
+        /* --- FONDASI UMUM --- */
+        body { padding-top: 70px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1a1a1a; background-color: #f8f9fa; }
+        .text-primary-custom { color: #004c99 !important; }
+
+        /* --- NAVBAR RTB --- */
+        .custom-navbar {
+            background-color: #004c99; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed; top: 0; width: 100%; z-index: 1030;
+        }
+        .custom-navbar .nav-link { color: rgba(255, 255, 255, 0.8); font-weight: 500; padding-left: 1rem !important; padding-right: 1rem !important; }
+        .custom-navbar .nav-link:hover, .custom-navbar .nav-link.active { color: white; border-bottom: 2px solid #5d9cec; }
+
+        /* --- HERO SECTION BERITA --- */
+        .news-hero {
+            background: linear-gradient(135deg, #004c99 0%, #007bff 100%);
+            color: white;
+            padding: 80px 0 40px;
+            margin-bottom: 40px;
+        }
+        
+        /* --- KERANJANG KATA KUNCI --- */
+        .keyword-basket {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-left: 5px solid #004c99;
+        }
+        .keyword-tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 12px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .keyword-tag:hover, .keyword-tag.active {
+            background-color: #004c99;
+            color: white;
+        }
+        
+        /* --- BERITA UTAMA / HIGHLIGHT --- */
+        .featured-news {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        .featured-news:hover {
+            transform: translateY(-5px);
+        }
+        .featured-news img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        .featured-news:hover img {
+            transform: scale(1.05);
+        }
+        .featured-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            color: white;
+            padding: 30px;
+        }
+        .news-badge {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        /* --- GRID BERITA --- */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .news-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+            background-color: white;
+        }
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .news-card-body {
+            padding: 20px;
+        }
+        .news-category {
+            color: #004c99;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .news-date {
+            color: #6c757d;
+            font-size: 0.8rem;
+        }
+        
+        /* --- DETAIL BERITA UTAMA --- */
+        .news-detail {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            display: none;
+        }
+        .news-detail img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        .step-box {
+            background-color: #f0f7ff;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 4px solid #004c99;
+        }
+        .step-number {
+            display: inline-block;
+            background-color: #004c99;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .benefit-icon {
+            background-color: #e6f2ff;
+            color: #004c99;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .table-custom {
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table-custom th {
+            background-color: #004c99;
+            color: white;
+        }
+        
+        /* --- MODAL DETAIL BERITA --- */
+        .news-modal img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        /* --- FOOTER --- */
+        .site-footer { background-color: #f8f8f8; border-top: 1px solid #eee; padding-top: 50px; padding-bottom: 20px; }
+        .btn-primary-custom { background-color: #004c99; border-color: #004c99; }
+        
+        /* --- ANIMASI --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg custom-navbar">
+        <div class="container-fluid container-xl">
+            <a class="navbar-brand text-white fw-bold" href="index.html">
+                <img src="assets/images/white_logo_RTB.png" alt="Logo Rumah Biru" height="40" class="me-2">
+                HARMONI
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a href="ppbp_ppti.html" class="nav-link">PPBP PPTI</a></li>
+                    <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="booking.html" class="nav-link">Booking</a></li>
+                    <li class="nav-item"><a href="laporan.html" class="nav-link">Pelaporan</a></li>
+                    <li class="nav-item"><a href="gudang.html" class="nav-link">Gudang</a></li>
+                    <li class="nav-item"><a href="Berita.html" class="nav-link active" aria-current="page">Berita</a></li>
+                </ul>
+                
+                <div class="d-flex">
+                    <a href="register.html" class="btn btn-danger me-2">Daftar Sekarang</a>
+                    <a href="login.html" class="btn btn-outline-light">Login</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section Berita -->
+    <section class="news-hero">
+        <div class="container-xl text-center">
+            <h1 class="display-4 fw-bold mb-3">Berita & Kegiatan Rumah Biru</h1>
+            <p class="lead mb-4">Ikuti informasi terbaru seputar kegiatan, pengumuman, dan acara di Rumah Biru</p>
+            <div class="input-group mx-auto" style="max-width: 500px;">
+                <input type="text" class="form-control" placeholder="Cari berita atau kegiatan...">
+                <button class="btn btn-light" type="button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container-xl py-4">
+        <!-- Keranjang Kata Kunci -->
+        <section class="keyword-basket fade-in">
+            <h3 class="h5 mb-3">Kategori Berita</h3>
+            <div class="d-flex flex-wrap">
+                <span class="keyword-tag active" data-category="all">Semua</span>
+                <span class="keyword-tag" data-category="pengumuman">Pengumuman</span>
+                <span class="keyword-tag" data-category="kegiatan">Kegiatan</span>
+                <span class="keyword-tag" data-category="lomba">Lomba & Kompetisi</span>
+                <span class="keyword-tag" data-category="lingkungan">Lingkungan</span>
+                <span class="keyword-tag" data-category="tutorial">Tutorial</span>
+                <span class="keyword-tag" data-category="natal">Natal</span>
+                <span class="keyword-tag" data-category="akademik">Akademik</span>
+                <span class="keyword-tag" data-category="fasilitas">Fasilitas</span>
+                <span class="keyword-tag" data-category="prestasi">Prestasi</span>
+            </div>
+        </section>
+
+        <!-- Berita Utama/Highlight -->
+        <section class="featured-news fade-in" id="takakura-highlight">
+            <img src="assets/images/Berita/keranjang katakura.webp" alt="Keranjang Takakura">
+            <div class="featured-overlay">
+                <span class="news-badge">HIGHLIGHT</span>
+                <h2 class="h1 fw-bold">Metode Takakura: Solusi Pengomposan Sampah Organik di Rumah Biru</h2>
+                <p class="mb-0 fs-5">Pelajari cara mudah mengelola sampah organik dengan metode Takakura yang ramah lingkungan</p>
+                <button class="btn btn-light mt-3" onclick="toggleTakakuraDetail()">Pelajari Selengkapnya</button>
+            </div>
+        </section>
+
+        <!-- Detail Berita Utama (Awalnya Tersembunyi) -->
+        <section class="news-detail fade-in" id="takakura-detail">
+            <div class="row">
+                <div class="col-md-8">
+                    <span class="badge bg-success mb-3">LINGKUNGAN</span>
+                    <h1 class="display-5 fw-bold text-primary-custom mb-4">Metode Takakura: Solusi Pengomposan Sampah Organik di Rumah Biru</h1>
+                    
+                    <div class="d-flex align-items-center mb-4 text-muted">
+                        <i class="bi bi-calendar me-2"></i>
+                        <span class="me-3">10 Desember 2024</span>
+                        <i class="bi bi-person me-2"></i>
+                        <span>Oleh: Tim Lingkungan Rumah Biru</span>
+                    </div>
+                    
+                    <img src="assets/images/Berita/keranjang katakura.webp" alt="Metode Takakura">
+                    
+                    <p class="lead">Rumah Biru memperkenalkan metode Takakura sebagai solusi inovatif untuk mengelola sampah organik di lingkungan asrama. Metode ini tidak hanya ramah lingkungan tetapi juga mudah diterapkan oleh setiap warga Biru.</p>
+                    
+                    <h3 class="mt-5 mb-3">Apa Itu Metode Takakura?</h3>
+                    <p>Metode Takakura adalah teknik pengomposan sampah organik menggunakan keranjang yang dikembangkan oleh Koji Takakura dari Jepang. Metode ini sangat efektif untuk mengubah sisa makanan menjadi kompos berkualitas dalam waktu singkat.</p>
+                    
+                    <h3 class="mt-5 mb-3">Bahan dan Alat yang Diperlukan</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Komponen</th>
+                                    <th>Bahan/Alat</th>
+                                    <th>Fungsi Utama</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Wadah Utama</strong></td>
+                                    <td>Keranjang plastik berlubang</td>
+                                    <td>Memastikan sirkulasi udara (aerasi)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Media Pelapis</strong></td>
+                                    <td>Kardus tebal</td>
+                                    <td>Melapisi dinding keranjang untuk menjaga kelembapan dan suhu</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Penyerap Cairan</strong></td>
+                                    <td>Bantalan sekam padi</td>
+                                    <td>Menyerap air lindi dan mengatur udara</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Inti Pengurai</strong></td>
+                                    <td>Biang kompos (starter)</td>
+                                    <td>Mengandung mikroorganisme untuk memulai penguraian</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Aktivator</strong></td>
+                                    <td>EM4 atau MOL</td>
+                                    <td>Memperkaya bakteri pengurai</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="mt-5 mb-3">Langkah Pembuatan Keranjang Takakura</h3>
+                    
+                    <div class="step-box">
+                        <h5><span class="step-number">1</span> Siapkan Keranjang</h5>
+                        <p class="mb-0">Ambil keranjang plastik berlubang yang akan digunakan sebagai wadah utama.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5><span class="step-number">2</span> Pasang Kardus Pelapis</h5>
+                        <p class="mb-0">Lapisi bagian dalam keranjang dengan kardus tebal hingga menutupi semua sisi. Pastikan kardus lebih rendah dari bibir keranjang untuk sirkulasi udara optimal.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5><span class="step-number">3</span> Siapkan Biang Kompos</h5>
+                        <p class="mb-0">Campurkan sekam, dedak, dan kompos jadi dengan perbandingan 1:1:1. Tambahkan larutan EM4/MOL yang sudah diencerkan hingga campuran terasa lembab.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5><span class="step-number">4</span> Susun Bantalan Sekam</h5>
+                        <p class="mb-0">Letakkan bantalan sekam di dasar keranjang, lalu masukkan biang kompos di atasnya.</p>
+                    </div>
+                    
+                    <div class="step-box">
+                        <h5><span class="step-number">5</span> Tutup dan Simpan</h5>
+                        <p class="mb-0">Tutup dengan bantalan sekam lagi dan simpan keranjang di tempat teduh, tidak terkena sinar matahari langsung atau hujan.</p>
+                    </div>
+                    
+                    <h3 class="mt-5 mb-3">Cara Menggunakan Keranjang Takakura</h3>
+                    <ol>
+                        <li><strong>Cacah sampah organik</strong> seperti sisa sayuran dan kulit buah menjadi potongan kecil</li>
+                        <li>Angkat bantalan sekam penutup dan masukkan sampah yang sudah dicacah</li>
+                        <li><strong>Aduk rata</strong> sampah dengan biang kompos untuk aerasi dan penyebaran mikroorganisme</li>
+                        <li>Tutup kembali dengan bantalan sekam dan tutup keranjang</li>
+                        <li>Ulangi proses ini setiap kali ada sampah organik</li>
+                        <li>Setelah keranjang penuh, biarkan kompos matang selama 2-3 minggu sebelum dipanen</li>
+                    </ol>
+                    
+                    <h3 class="mt-5 mb-3">Mengatasi Masalah Umum</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-custom table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Masalah</th>
+                                    <th>Penyebab</th>
+                                    <th>Solusi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Berbau Busuk</strong></td>
+                                    <td>Terlalu basah atau kurang aerasi</td>
+                                    <td>Tambahkan bahan kering seperti sekam dan aduk rata</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Banyak Lalat</strong></td>
+                                    <td>Memasukkan sisa daging/minyak atau tidak tertutup rapat</td>
+                                    <td>Hindari bahan bermasalah, tutup rapat, taburkan abu</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Tidak Ada Panas</strong></td>
+                                    <td>Kompos terlalu kering atau biang kurang aktif</td>
+                                    <td>Percikkan air dan tambahkan aktivator EM4/MOL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="mt-5 mb-3">Manfaat Metode Takakura</h3>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-recycle"></i>
+                        </div>
+                        <div>
+                            <h5>Mengurangi Sampah Organik</h5>
+                            <p class="mb-0">Mengurangi volume sampah organik yang dibuang ke TPA hingga 50%.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-flower1"></i>
+                        </div>
+                        <div>
+                            <h5>Menghasilkan Kompos Berkualitas</h5>
+                            <p class="mb-0">Menghasilkan pupuk organik kaya nutrisi untuk tanaman.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="bi bi-house-check"></i>
+                        </div>
+                        <div>
+                            <h5>Bisa Dilakukan di Dalam Ruangan</h5>
+                            <p class="mb-0">Tidak menimbulkan bau sehingga bisa diletakkan di dapur atau teras.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="alert alert-success mt-4">
+                        <h5><i class="bi bi-info-circle me-2"></i> Workshop Takakura</h5>
+                        <p class="mb-0"><strong>Tanggal:</strong> 18 Desember 2024<br>
+                        <strong>Waktu:</strong> 14.00 - 16.00 WIB<br>
+                        <strong>Tempat:</strong> Plaza Rumah Biru<br>
+                        <strong>Pendaftaran:</strong> Gratis untuk warga Biru. Daftar di meja resepsionis sebelum 16 Desember.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card sticky-top" style="top: 100px;">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">Info Singkat</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6>Tanggal Kegiatan</h6>
+                                <p class="mb-0">18 Desember 2024</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Waktu</h6>
+                                <p class="mb-0">14.00 - 16.00 WIB</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Tempat</h6>
+                                <p class="mb-0">Plaza RTB</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Peserta</h6>
+                                <p class="mb-0">Terbuka untuk semua warga Biru</p>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Biaya</h6>
+                                <p class="mb-0">Gratis (termasuk bahan)</p>
+                            </div>
+                            <button class="btn btn-success w-100 mt-2">Daftar Sekarang</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Berita Lainnya -->
+        <h2 class="mt-5 mb-4 border-bottom pb-2">Berita Lainnya</h2>
+        
+        <section class="news-grid">
+            <!-- Berita 1 -->
+            <div class="news-card" data-category="lomba natal">
+                <img src="https://images.unsplash.com/photo-1574359411659-61974a5de094?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Lomba Dekorasi Natal">
+                <div class="news-card-body">
+                    <span class="news-category">Lomba & Kompetisi</span>
+                    <h4 class="h5 fw-bold">Lomba Dekorasi Kamar Bertema Natal 2024</h4>
+                    <p class="text-muted">Ajang kreativitas warga Biru dalam mendekorasi kamar dengan tema Natal. Hadiah menarik menanti!</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="news-date"><i class="bi bi-calendar me-1"></i> 15 Des 2024</span>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal" data-news-id="2">Baca</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Berita 2 -->
+            <div class="news-card" data-category="pengumuman fasilitas">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80" alt="Perbaikan Fasilitas">
+                <div class="news-card-body">
+                    <span class="news-category">Pengumuman</span>
+                    <h4 class="h5 fw-bold">Perbaikan Ruang Coworking Space 10-15 Desember</h4>
+                    <p class="text-muted">Mohon maaf atas ketidaknyamanannya. Ruang CWS akan ditutup sementara untuk perbaikan dan peningkatan fasilitas.</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="news-date"><i class="bi bi-calendar me-1"></i> 8 Des 2024</span>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal" data-news-id="3">Baca</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Berita 3 -->
+            <div class="news-card" data-category="kegiatan akademik">
+                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Workshop Kewirausahaan">
+                <div class="news-card-body">
+                    <span class="news-category">Kegiatan</span>
+                    <h4 class="h5 fw-bold">Workshop Kewirausahaan: Memulai Bisnis di Era Digital</h4>
+                    <p class="text-muted">Pelajari dasar-dasar memulai bisnis online dari praktisi berpengalaman. Gratis untuk seluruh warga Biru!</p>
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <span class="news-date"><i class="bi bi-calendar me-1"></i> 5 Des 2024</span>
+                        <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#newsModal" data-news-id="4">Baca</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <nav aria-label="Navigasi halaman berita">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled"><a class="page-link" href="#">Sebelumnya</a></li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
+            </ul>
+        </nav>
+    </main>
+
+    <!-- Modal Detail Berita -->
+    <div class="modal fade" id="newsModal" tabindex="-1" aria-labelledby="newsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsModalLabel">Detail Berita</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body news-modal">
+                    <!-- Konten akan diisi oleh JavaScript -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary-custom">Bagikan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="site-footer pt-5 pb-4 border-top">
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="assets/images/logo-footer.png" alt="Rumah Biru" height="40" class="me-2">
+                        <span class="fw-bold text-primary-custom" style="font-size: 1.5rem;">Rumah Biru</span>
+                    </div>
+                    <h5 class="fw-bold">Alamat</h5>
+                    <p class="text-muted">Jl. Pakuan No.3, Sumur Batu, Kec. Babakan Madang, Kabupaten Bogor, Jawa Barat 16810</p>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">FAQ</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Umum</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Persyaratan Pendaftaran</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-2 mb-4">
+                    <h5 class="fw-bold">Berita</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-muted">Tren RTB</a></li>
+                        <li><a href="#" class="text-decoration-none text-muted">Fakta PPBP/PPTI</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h2 class="text-danger fw-bolder mb-3">Ada Pertanyaan?</h2>
+                    <p class="text-muted">Hubungi kami sekarang juga untuk informasi lebih lanjut.</p>
+                    <a href="#" class="btn btn-primary-custom text-white fw-bold">Hubungi Kami</a>
+                </div>
+            </div>
+            <div class="text-center text-muted border-top pt-3 mt-3">
+                © 2025 Rumah Biru. Semua hak cipta dilindungi.
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Data berita
+        const newsData = {
+            2: {
+                title: "Lomba Dekorasi Kamar Bertema Natal 2024",
+                category: "Lomba & Kompetisi",
+                date: "15 Desember 2024",
+                image: "https://images.unsplash.com/photo-1574359411659-61974a5de094?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                content: `
+                    <p>Tunjukkan kreativitasmu dalam mendekorasi kamar dengan tema Natal! Rumah Biru mengadakan Lomba Dekorasi Kamar Bertema Natal 2024 dengan hadiah menarik.</p>
+                    
+                    <h5>Ketentuan Lomba:</h5>
+                    <ul>
+                        <li>Peserta: Per kamar (boleh berkolaborasi antar penghuni kamar)</li>
+                        <li>Tema: "Natal Penuh Makna dan Kehangatan"</li>
+                        <li>Periode Penilaian: 18-22 Desember 2024</li>
+                        <li>Pengumuman Pemenang: 24 Desember 2024</li>
+                    </ul>
+                    
+                    <h5>Hadiah:</h5>
+                    <ul>
+                        <li>Juara 1: Voucher belanja senilai Rp 500.000 + Sertifikat</li>
+                        <li>Juara 2: Voucher belanja senilai Rp 300.000 + Sertifikat</li>
+                        <li>Juara 3: Voucher belanja senilai Rp 200.000 + Sertifikat</li>
+                    </ul>
+                    
+                    <p>Daftarkan kamarmu dengan mengisi formulir di meja resepsionis sebelum tanggal 17 Desember 2024.</p>
+                `
+            },
+            3: {
+                title: "Perbaikan Ruang Coworking Space 10-15 Desember",
+                category: "Pengumuman",
+                date: "8 Desember 2024",
+                image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
+                content: `
+                    <p>Diberitahukan kepada seluruh warga Biru bahwa Ruang Coworking Space (CWS) akan ditutup sementara untuk perbaikan dan peningkatan fasilitas pada:</p>
+                    
+                    <p><strong>Tanggal:</strong> 10-15 Desember 2024<br>
+                    <strong>Alasan:</strong> Perbaikan sistem pendingin ruangan, penambahan stop kontak, dan perawatan furnitur</p>
+                    
+                    <p>Selama masa perbaikan, warga Biru dapat menggunakan alternatif ruang belajar di:</p>
+                    <ul>
+                        <li>Ruang Komunal lantai 2, 3, dan 4</li>
+                        <li>Perpustakaan kampus (jam operasional terbatas)</li>
+                        <li>Ruang Theater (kecuali ada acara khusus)</li>
+                    </ul>
+                    
+                    <p>Kami memohon maaf atas ketidaknyamanan ini. Ruang CWS akan kembali beroperasi normal pada tanggal 16 Desember 2024 dengan fasilitas yang lebih baik.</p>
+                `
+            },
+            4: {
+                title: "Workshop Kewirausahaan: Memulai Bisnis di Era Digital",
+                category: "Kegiatan",
+                date: "5 Desember 2024",
+                image: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+                content: `
+                    <p>Rumah Biru bekerjasama dengan Inkubator Bisnis Kampus menyelenggarakan Workshop Kewirausahaan dengan tema "Memulai Bisnis di Era Digital".</p>
+                    
+                    <p><strong>Pembicara:</strong><br>
+                    - Bpk. Rizki Pratama (Founder TokoOnlineSukses.com)<br>
+                    - Ibu Sari Dewi (Digital Marketing Specialist)</p>
+                    
+                    <p><strong>Tanggal:</strong> 12 Desember 2024<br>
+                    <strong>Waktu:</strong> 13.00 - 16.00 WIB<br>
+                    <strong>Tempat:</strong> Ruang Serbaguna Rumah Biru</p>
+                    
+                    <h5>Materi Workshop:</h5>
+                    <ul>
+                        <li>Mengidentifikasi peluang bisnis di era digital</li>
+                        <li>Membangun brand personal di media sosial</li>
+                        <li>Strategi pemasaran digital dengan budget terbatas</li>
+                        <li>Studi kasus bisnis online sukses dari mahasiswa</li>
+                    </ul>
+                    
+                    <p>Workshop ini <strong>GRATIS</strong> untuk seluruh warga Biru. Tempat terbatas untuk 50 peserta pertama!</p>
+                `
+            }
+        };
+
+        // Fungsi untuk menampilkan/sembunyikan detail Takakura
+        function toggleTakakuraDetail() {
+            const detailSection = document.getElementById('takakura-detail');
+            if (detailSection.style.display === 'block') {
+                detailSection.style.display = 'none';
+            } else {
+                detailSection.style.display = 'block';
+                detailSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Fungsi untuk filter berita berdasarkan kategori
+        document.addEventListener('DOMContentLoaded', function() {
+            const keywordTags = document.querySelectorAll('.keyword-tag');
+            const newsCards = document.querySelectorAll('.news-card');
+            
+            keywordTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Hapus kelas active dari semua tag
+                    keywordTags.forEach(t => t.classList.remove('active'));
+                    // Tambah kelas active ke tag yang diklik
+                    this.classList.add('active');
+                    
+                    const category = this.getAttribute('data-category');
+                    
+                    // Filter berita
+                    newsCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Fungsi untuk menampilkan detail berita di modal
+            const newsModal = document.getElementById('newsModal');
+            if (newsModal) {
+                newsModal.addEventListener('show.bs.modal', function(event) {
+                    const button = event.relatedTarget;
+                    const newsId = button.getAttribute('data-news-id');
+                    const news = newsData[newsId];
+                    
+                    const modalTitle = newsModal.querySelector('.modal-title');
+                    const modalBody = newsModal.querySelector('.modal-body');
+                    
+                    modalTitle.textContent = news.title;
+                    modalBody.innerHTML = `
+                        <img src="${news.image}" alt="${news.title}">
+                        <div class="d-flex justify-content-between mb-3">
+                            <span class="badge bg-primary">${news.category}</span>
+                            <span class="text-muted"><i class="bi bi-calendar me-1"></i> ${news.date}</span>
+                        </div>
+                        <h3>${news.title}</h3>
+                        ${news.content}
+                    `;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
